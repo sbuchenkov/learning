@@ -2,15 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/fsdf/">
+<form method="post" action="" class="todo-form js-todo-form">
   <input type="text" name="bitch" id="our-input" value="" maxlength="10" placeholder="Введите значение">
-  <input type="button" value="Кнопка" onclick="inputOnClick()" >
+  <input type="submit" value="Кнопка">
 </form>
-<p id="result"></p>
+<form method="post" action="" class="todo-form js-todo-form-two">
+  <input type="text" name="bitch" id="our-input" value="" maxlength="10" placeholder="Введите значение">
+  <input type="submit" value="Кнопка">
+</form>
+<ul class="todo-list js-todo-list">
+  <li class="todo-list__item js-item">hello Pablo</li>
+  <li class="todo-list__item js-item">1</li>
+  <li class="todo-list__item js-item">2</li>
+</ul>
 <script type="text/javascript" src="js/main.js"></script>
-<p>hsdfsdfsss</p>
 </body>
 </html>
