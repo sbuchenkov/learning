@@ -3,7 +3,7 @@
 
   var todoForm = document.querySelector('.js-todo-form'),
       subTodoForm = document.querySelector('.js-todo-form-two'),
-      listItems = document.querySelectorAll('.js-item');
+      todoList = document.querySelector('.js-todo-list');
 
   function formEvents(form) {
 
@@ -14,17 +14,47 @@
       })
     }
 
+    function _deleteToDoFromList() {
+      var listItems = document.querySelectorAll('.js-item');
+          //numArray = [1, 2, 3, 4];
+
+          // numArray.forEach(function(arrayItem) {
+            // console.log(arrayItem);
+          // });
+
+      for(var i = 0; i < listItems.length; i++) {
+        listItems[i].addEventListener('click', function() {
+          this.remove();
+        })
+      }
+    }
+
+    function editTodo() {
+      var listItems = document.querySelectorAll('.js-item');
+      for(var i = 0; i < listItems.length; i++) {
+        listItems[i].addEventListener('click', function(){
+          var that = this;
+          this.innerHTML = '<input type="text" placeholder"'+ this.innerText +'" class="js-edit" >';
+          document.querySelector('.js-edit').onchange = function() {
+            that.removeEventListener('click');
+            this.parentNode.innerText = this.value;
+          }
+        });
+      }
+    }
+
     function addTodoToList() {
-      var todoList = document.querySelector('.js-todo-list');
 
       form.addEventListener('submit', function(event){
         event.preventDefault();
         var listItem = document.createElement('li'),
             inputFieldValue = event.target.querySelector('input[type=text]').value;
 
-        listItem.classList.add('todo-list__item js-item');
+        listItem.classList += 'todo-list__item js-item';
         listItem.innerText = inputFieldValue;
         todoList.appendChild(listItem);
+        //_deleteToDoFromList();
+        editTodo();
       })
 
     }
