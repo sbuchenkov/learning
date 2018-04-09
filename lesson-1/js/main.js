@@ -16,11 +16,6 @@
 
     function _deleteToDoFromList() {
       var listItems = document.querySelectorAll('.js-item');
-          //numArray = [1, 2, 3, 4];
-
-          // numArray.forEach(function(arrayItem) {
-            // console.log(arrayItem);
-          // });
 
       for(var i = 0; i < listItems.length; i++) {
         listItems[i].addEventListener('click', function() {
@@ -30,17 +25,34 @@
     }
 
     function editTodo() {
-      var listItems = document.querySelectorAll('.js-item');
+      var listItems = document.querySelectorAll('.js-item'),
+          addInput = function() {
+            if (this.childNodes.length <= 1) {
+              var that = this,
+                  input = document.createElement('input'),
+                  text = this.querySelector('p');
+
+              text.style.display = 'none';
+              input.setAttribute('type', 'text');
+              input.classList.add('js-edit');
+              input.setAttribute('placeholder', text.innerText);
+
+              this.appendChild(input);
+
+              input.addEventListener('change', function() {
+                text.innerText = this.value;
+                text.style.display = 'block';
+                this.remove();
+              });
+            }
+          };
+
       for(var i = 0; i < listItems.length; i++) {
-        listItems[i].addEventListener('click', function(){
-          var that = this;
-          this.innerHTML = '<input type="text" placeholder"'+ this.innerText +'" class="js-edit" >';
-          document.querySelector('.js-edit').onchange = function() {
-            that.removeEventListener('click');
-            this.parentNode.innerText = this.value;
-          }
+        listItems[i].addEventListener('click', function() {
+          addInput.apply(this);
         });
       }
+
     }
 
     function addTodoToList() {
@@ -48,10 +60,11 @@
       form.addEventListener('submit', function(event){
         event.preventDefault();
         var listItem = document.createElement('li'),
-            inputFieldValue = event.target.querySelector('input[type=text]').value;
+            paragraph = document.createElement('p');
+            paragraph.innerText = event.target.querySelector('input[type=text]').value;
 
         listItem.classList += 'todo-list__item js-item';
-        listItem.innerText = inputFieldValue;
+        listItem.appendChild(paragraph);
         todoList.appendChild(listItem);
         //_deleteToDoFromList();
         editTodo();
@@ -61,17 +74,17 @@
 
     return{
       submit: formSubmitEvent,
-      addTodo: addTodoToList
+      addTodo: addTodoToList,
+      editTodo: editTodo
     }
   }
 
   var eventTodoFormInstance = new formEvents(todoForm);
   eventTodoFormInstance.submit();
+  eventTodoFormInstance.editTodo();
 
   var eventTodoFormTwoInstance = new formEvents(subTodoForm);
   eventTodoFormTwoInstance.addTodo();
-
-  console.log(listItems.length);
 
 })();
 

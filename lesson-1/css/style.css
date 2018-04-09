@@ -1,3 +1,12 @@
+p{
+  margin: 0;
+}
+
+body{
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
 .todo-form{
   display: block;
   width: 320px;
@@ -15,4 +24,31 @@
   padding: 13px 32px;
   text-decoration: none;
   text-shadow: rgb(47, 102, 39) 0px 1px 0px;">turquoise</span> */
+}
+
+
+
+.todo-list__item input[type=text], input[type=text]:focus{
+  color: black;
+  outline: none;
+  font-size: 16px;
+  border: none;
+  padding: 0;
+  line-height: normal;
+}
+.todo-list__item input[type=text]::placeholder{
+  color: yellow;
+}
+
+.todo-list__item input[type=text]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: pink;
+}
+.todo-list__item input[type=text]::-moz-placeholder { /* Firefox 19+ */
+  color: pink;
+}
+.todo-list__item input[type=text]:-ms-input-placeholder { /* IE 10+ */
+  color: pink;
+}
+.todo-list__item input[type=text]:-moz-placeholder { /* Firefox 18- */
+  color: pink;
 }
